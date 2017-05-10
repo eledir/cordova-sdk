@@ -1,0 +1,26 @@
+{
+  "name": "beaconinside-cordova",
+  "version": "2.8.0",
+  "description": "Beaconinside SDK Plugin",
+  "cordova": {
+    "id": "com.beaconinside.sdk",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beaconinside/cordova-sdk.git"
+  },
+  "keywords": [
+    "cordova",
+    "bluetooth",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Beaconinside GmbH",
+  "bugs": {
+    "url": "https://github.com/beaconinside/cordova-sdk/issues"
+  },
+  "homepage": "https://github.com/beaconinside/cordova-sdk#readme"
+}
