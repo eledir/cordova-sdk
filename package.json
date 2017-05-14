@@ -2,6 +2,7 @@
   "name": "beaconinside-cordova",
   "version": "2.8.0",
   "description": "Beaconinside SDK Plugin",
+  "license": "UNLICENSED",
   "cordova": {
     "id": "com.beaconinside.sdk",
     "platforms": [
@@ -16,11 +17,12 @@
     "cordova",
     "bluetooth",
     "ecosystem:cordova",
-    "cordova-android"
+    "cordova-android",
+    "cordova-ios"
   ],
   "author": "Beaconinside GmbH",
   "bugs": {
     "url": "https://github.com/beaconinside/cordova-sdk/issues"
   },
-  "homepage": "https://github.com/beaconinside/cordova-sdk#readme"
+  "homepage": "https://github.com/beaconinside/cordova-sdk"
 }

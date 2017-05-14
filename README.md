@@ -1,6 +1,6 @@
 ## Summary
 
-Beaconinside Cordova SDK for Android &amp; iOS (coming asap) platform. 
+Beaconinside Cordova SDK for Android &amp; iOS (coming asap) platform.
 
 See also the documentation for the [native SDKs](https://github.com/beaconinside/sdks).
 
@@ -23,8 +23,11 @@ You can easily set up a sample project.
 ```bash
 $cordova create BeaconinsideApp
 $cordova platform add android
+$cordova platform add ios
 $cordova plugin add https://github.com/beaconinside/cordova-sdk
+$cordova plugin add cordova-plugin-geolocation
 $cordova run android
+$cordova run ios
 ```
 
 Initialize the Beaconinside SDK in the *index.js*. See [account setup](#account) to get your own application token.
@@ -37,7 +40,7 @@ onDeviceReady: function() {
   window.initBeaconinsideSDK("YOUR_APP_TOKEN");
 }
 ```
-   
+
 ## <a id="get-sdk"></a>Get the SDK
 
 You can get the latest version from the [releases](https://github.com/beaconinside/cordova-sdk/releases) page or use the *master branch*.
@@ -51,7 +54,7 @@ Add the Beaconinside SDK as a Cordova plugin.
 $cordova plugin add https://github.com/beaconinside/cordova-sdk
 ```
 
-Initialize the Beaconinside SDK. See [account setup](#account) to get your own application token.
+Initialize the Beaconinside SDK with the `initBeaconinsideSDK()` method. See [account setup](#account) to get your own application token.
 
 ```js
 onDeviceReady: function() {
@@ -64,6 +67,7 @@ onDeviceReady: function() {
 
 Continue with the next section to ask for the user's permission to use the device's location.
 
+
 ## <a id="permissions"></a>Ask for location permission
 
 For the Beaconinside SDK to work, the app needs to be authorized to use the device's location in the background.
@@ -74,11 +78,15 @@ The easiest way is to use the [geolocation plugin](https://github.com/apache/cor
 $cordova plugin add cordova-plugin-geolocation
 ```
 
-Make sure that for iOS10+ you have set the *NSLocationAlwaysUsageDescription* value in the */{project}/platforms/ios/{project}/{project}-Info.plist* that is presented to the user.
+Make sure that for iOS10+ you have set the *NSLocationAlwaysUsageDescription* value in the
+
+You have to change the description for the `NSLocationAlwaysUsageDescription` and since iOS 10 the `NSBluetoothPeripheralUsageDescription` key in the `/{project}/platforms/ios/{project}/Info.plist` with a short and friendly text why you are using it.
 
 ```xml
 <key>NSLocationAlwaysUsageDescription</key>
 <string>Specifies the reason for accessing the user's location information.</string>
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>This app requires Bluetooth to detect nearby beacons</string>
 ```
 
 You can check the logfiles if there are location errors.
@@ -105,7 +113,21 @@ On Android and iOS you check in the settings app what permissions are provided f
 
 ## <a id="faq"></a>FAQs & Guides
 
-### Usage Guides 
+### Requirements
+
+**iOS**
+
+* [Sign up][dmp] for an application token
+* iOS 8.0+
+
+**Android**
+
+* [Sign up][dmp] for an application token
+* Android 2.3 (API Level 9) or above
+* Beacon detection only works with Android 4.3 (API Level 18)
+* Google Play services
+
+### Usage Guides
 
 * [Campaign Demo Guide](http://developers.beaconinside.com/docs/demoing-beacons-and-geofences)
 * [Setting up a virtual beacon](http://developers.beaconinside.com/docs/virtual-ibeacon)
@@ -135,7 +157,7 @@ GeofenceServiceRegionExit
 The notifications dictionary include for beacons
 `BeaconID, proximity UUID, major, minor, proximity and source`. The latter defaults to "com.beaconinside". For geofences it's `GeofenceID, latitude, longitude, radius and source`.
 
-Custom meta data (e.g. internal venue or zone IDs) can be added in the web panel with key=value pairs for beacons and geofences. 
+Custom meta data (e.g. internal venue or zone IDs) can be added in the web panel with key=value pairs for beacons and geofences.
 
 For Cordova the easiest way is to use the *cordova-broadcaster plugin* (forked version because of a required bug fix).
 
@@ -155,7 +177,8 @@ onDeviceReady: function() {
    }
 
   window.broadcaster.addEventListener( "BeaconServiceRegionEnter", listener);
-   
+
+  window.requestAuthorization();
   window.initBeaconinsideSDK("YOUR_APP_TOKEN");
 }
 ```
@@ -185,5 +208,3 @@ Copyright (c) 2015-2017 Beaconinside GmbH. All rights reserved.
 [dev-hub]: http://developers.beaconinside.com
 [beaconinside]: https://www.beaconinside.com
 [dmp]: https://dmp.beaconinside.com
-
-

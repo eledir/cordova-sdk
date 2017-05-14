@@ -2,10 +2,14 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="com.beaconinside.sdk"
-        version="0.9">
-    <name>BeaconinsideSDK</name>
-    <description>Beaconinside SDK Plugin</description>
-    <keywords>cordova,bluetooth</keywords>
+        version="1.0">
+    <name>Beaconinside SDK</name>
+    <description>The Beaconinside SDK simplifies the integration of beacons, geofences and proximity services into your Cordova app.</description>
+    <keywords>cordova,bluetooth,ibeacon,eddystone,geofencing</keywords>
+    <author>Beaconinside GmbH</author>
+    <repo>https://github.com/beaconinside/cordova-sdk.git</repo>
+    <issue>https://github.com/beaconinside/cordova-sdk/issues</issue>
+    <license>Commercial</license>
 
     <js-module src="www/beaconinside.js" name="beaconinside">
         <clobbers target="cordova.beaconinside" />
@@ -31,7 +35,31 @@
         <framework src="com.google.android.gms:play-services-gcm:10.2.0" />
 
         <framework src="src/android/beaconinside-sdk" custom="true" />
+    </platform>
 
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="BeaconinsideSDK">
+                <param name="ios-package" value="BeaconinsideSdkPlugin"/>
+            </feature>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+          <string>Location is used to provide additional services</string>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="NSBluetoothPeripheralUsageDescription">
+          <string>This app uses Bluetooth communication to detect nearby beacons</string>
+        </config-file>
+
+        <source-file src="src/ios/BeaconinsideSdkPlugin.m"  target-dir="src/com/beaconinside/iossdk"/>
+
+        <framework src="src/ios/BeaconService.framework" custom="true"/>
+        <framework src="CoreLocation.framework" />
+		    <framework src="CoreBluetooth.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="libz.dylib" />
     </platform>
 
 </plugin>
