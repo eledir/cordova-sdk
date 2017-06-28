@@ -21,13 +21,14 @@ See also the documentation for the [native SDKs](https://github.com/beaconinside
 You can easily set up a sample project.
 
 ```bash
-$cordova create BeaconinsideApp
-$cordova platform add android
-$cordova platform add ios
-$cordova plugin add https://github.com/beaconinside/cordova-sdk
-$cordova plugin add cordova-plugin-geolocation
-$cordova run android
-$cordova run ios
+cordova create BeaconinsideApp
+cd BeaconinsideApp
+cordova platform add android
+cordova platform add ios
+cordova plugin add https://github.com/beaconinside/cordova-sdk
+cordova plugin add cordova-plugin-geolocation
+cordova run android
+cordova run ios
 ```
 
 Initialize the Beaconinside SDK in the *index.js*. See [account setup](#account) to get your own application token.
@@ -51,7 +52,7 @@ You can get the latest version from the [releases](https://github.com/beaconinsi
 Add the Beaconinside SDK as a Cordova plugin.
 
 ```bash
-$cordova plugin add https://github.com/beaconinside/cordova-sdk
+cordova plugin add https://github.com/beaconinside/cordova-sdk
 ```
 
 Initialize the Beaconinside SDK with the `initBeaconinsideSDK()` method. See [account setup](#account) to get your own application token.
@@ -75,7 +76,7 @@ For the Beaconinside SDK to work, the app needs to be authorized to use the devi
 The easiest way is to use the [geolocation plugin](https://github.com/apache/cordova-plugin-geolocation).
 
 ```bash
-$cordova plugin add cordova-plugin-geolocation
+cordova plugin add cordova-plugin-geolocation
 ```
 
 Make sure that for iOS10+ you have set the *NSLocationAlwaysUsageDescription* value in the
@@ -91,10 +92,10 @@ You have to change the description for the `NSLocationAlwaysUsageDescription` an
 
 You can check the logfiles if there are location errors.
 
-```
-$adb logcat
-...
-java.lang.SecurityException: Need ACCESS_COARSE_LOCATION or ACCESS_FINE_LOCATION permission to get scan results
+```bash
+adb logcat
+
+# java.lang.SecurityException: Need ACCESS_COARSE_LOCATION or ACCESS_FINE_LOCATION permission to get scan results
 ```
 
 On Android and iOS you check in the settings app what permissions are provided for each app.
@@ -162,7 +163,7 @@ Custom meta data (e.g. internal venue or zone IDs) can be added in the web panel
 For Cordova the easiest way is to use the *cordova-broadcaster plugin* (forked version because of a required bug fix).
 
 ```bash
-$cordova plugin add https://github.com/beaconinside/cordova-broadcaster
+cordova plugin add https://github.com/beaconinside/cordova-broadcaster
 ```
 
 In you code you can now receive beacon and geofence events.
@@ -186,10 +187,10 @@ onDeviceReady: function() {
 See also the log output for event notifications.
 
 ```bash
-$adb logcat
-$adb logcat | grep fireEvent
+adb logcat
+adb logcat | grep fireEvent
 ...
-05-10 16:08:38.943   319   319 D CordovaWebViewImpl: >>> loadUrl(javascript:window.broadcaster.fireEvent( 'BeaconServiceRegionEnter', {"proximity":"near","rssi":-68,"uuid":"F0018B9B-7509-4C31-A905-1A27D39C003C","major":42209,"minor":12731} );)
+# 05-10 16:08:38.943   319   319 D CordovaWebViewImpl: >>> loadUrl(javascript:window.broadcaster.fireEvent( 'BeaconServiceRegionEnter', {"proximity":"near","rssi":-68,"uuid":"F0018B9B-7509-4C31-A905-1A27D39C003C","major":42209,"minor":12731} );)
 ```
 
 ### <a id="api"></a>Access the API
