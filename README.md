@@ -1,6 +1,6 @@
 ## Summary
 
-Beaconinside Cordova SDK for Android &amp; iOS (coming asap) platform.
+Beaconinside Cordova SDK for Android &amp; iOS platform.
 
 See also the documentation for the [native SDKs](https://github.com/beaconinside/sdks).
 
